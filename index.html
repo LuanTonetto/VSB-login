@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VSB - Acesso</title>
+ <link rel="shortcut icon" href="favicon.ico">
+</head>
+<style>
+body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #003366, #0077b6);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-weight: 300;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .login-form input {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .login-form input::placeholder {
+      color: #999;
+    }
+
+    .login-form button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #0077b6;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-form button:hover {
+      background-color: #0090d1;
+    }
+
+    .divider {
+      margin: 30px 0;
+      border: none;
+      border-top: 1px solid #ffffff40;
+    }
+
+    .link-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .link-list li {
+      margin-bottom: 15px;
+    }
+
+    .link-list a {
+      display: block;
+      background: #ffffff20;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      font-weight: 500;
+    }
+
+    .link-list a:hover {
+      background: #ffffff40;
+      border-color: #ffffff80;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    }
+
+   .loader {
+  margin: 30px auto 0 auto; /* centraliza horizontalmente */
+  width: 48px;
+  height: 48px;
+  border: 5px solid transparent;
+  border-top: 5px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+
+/* Para telas menores que 600px (celulares) */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  nav .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav .menu li {
+    margin: 10px 0;
+  }
+
+  .card {
+    width: 100%; /* Cards ocupam 100% da largura da tela pequena */
+  }
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+
+</style>
+<body>
+  <div class="glass-card">
+    <h1>🔐 Acesso VSB</h1>
+
+    <!-- Área de Login -->
+    <form id="login-form" class="login-form">
+    <input type="text" id="username" placeholder="Usuário" required />
+    <input type="password" id="password" placeholder="Senha" required />
+    <button type="submit">Entrar</button>
+    </form>
+
+    <!-- Área de Links (invisível até o login) -->
+    <div id="links-area" style="display: none;">
+      <hr class="divider" />
+      <h2>🔗 Links Úteis</h2>
+      <ul class="link-list">
+        <li><a href="https://www.juvo.com.br/juvoweb/api/login" target="_blank">Porto</a></li>
+        <li><a href="https://www.acionafacil.com.br/Login.aspx" target="_blank">Aciona Facil</a></li>
+        <li><a href="https://www.veniti.com.br/prestador/login/" target="_blank">Veniti</a></li>
+        <li><a href="https://prestador.portoseguro.com.br/portal/site/pdp/template.LOGIN/" target="_blank">Prestador</a></li>
+        <li><a href="https://toaki.cdf.net/" target="_blank">Toaki</a></li>
+        <li><a href="https://prestador.notro.io/#/login/" target="_blank">Notro</a></li>
+        <li><a href="https://tms-prestador.tokiomarine.com.br/login?returnUrl=home" target="_blank">Tokio Marine</a></li>
+        <li><a href="https://www.webmondial.com.br/Vianet/Login.aspx" target="_blank">Mondial</a></li>
+      </ul>
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript simples para controlar o login -->
+  <script>
+  const loginForm = document.getElementById('login-form');
+  const linksArea = document.getElementById('links-area');
+
+  // Usuário e senha autorizados
+  const authorizedUser = "admin";
+  const authorizedPassword = "admin";
+
+  loginForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (username === authorizedUser && password === authorizedPassword) {
+      loginForm.style.display = 'none';
+      linksArea.style.display = 'block';
+    } else {
+      alert("Usuário ou senha incorretos.");
+    }
+  });
+</script>
+
+</body>
+</html>
